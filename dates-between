@@ -1,0 +1,70 @@
+package pirmas;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
+/**
+ *
+ * @author Ana
+ */
+public class Pirmas {
+    public static void main(String[] args) {
+        printBonusDatesBetween(2010, 2015);
+    }
+    
+    public static void printBonusDatesBetween(int fromYear, int toYear) {
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        String date = "";
+        if (fromYear > 1001 && toYear < 9291) {
+            
+            for (int i=fromYear; i<toYear; i++) {
+                year = i;
+                int reversed = reverse(year);
+                if (reversed >= 101) {
+                    day = reversed % 100;
+                    month = (int) Math.floor(reversed/100);
+                    if (day > 0 && month > 0) {
+                        date = year + "-" + (month<10 ? "0"+Integer.toString(month) : Integer.toString(month)) + "-" + (day<10 ? "0"+Integer.toString(day) : Integer.toString(day));
+                        if (dateIsValid(date, month, day)) {
+                            System.out.println(date);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public static int reverse(int n) {
+        int reversed = 0;
+        while(n != 0){
+            reversed = reversed * 10;
+            reversed = reversed + n%10;
+            n = n/10;
+        }
+        return reversed;
+    }
+    
+    public static boolean checkDate(int month, int day) {
+        if (day > 0 && day <= 31 && month > 0 && month <= 12) {
+            return true;
+        } else return false;
+    }
+    
+    private static boolean dateIsValid(String date, int month, int day) {
+        boolean status = false;
+        
+        if (checkDate(month, day)) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormat.setLenient(false);
+            try {
+                dateFormat.parse(date);
+                status = true;
+            } catch (Exception e) {
+                status = false;
+            }
+        }
+        return status;
+    }
+}
