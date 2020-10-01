@@ -17,22 +17,22 @@ public class Pirmas {
         int month;
         int day;
         String date;
-            for (int i=fromYear; i<toYear; i++) {
-                year = i;
-                if (year > 999) {
-                    int reversed = reverse(year);
-                    if (reversed >= 101) {
-                        day = reversed % 100;
-                        month = (int) Math.floor(reversed/100);
-                        if (day > 0 && month > 0) {
-                            date = year + "-" + (month<10 ? "0"+Integer.toString(month) : Integer.toString(month)) + "-" + (day<10 ? "0"+Integer.toString(day) : Integer.toString(day));
-                            if (dateIsValid(date, month, day)) {
-                                System.out.println(date);
-                            }
+        for (int i=fromYear; i<toYear; i++) {
+            year = i;
+            if (year > 999) {
+                int reversed = reverse(year);
+                if (reversed >= 101) {
+                    day = reversed % 100;
+                    month = (int) Math.floor(reversed/100);
+                    if (day > 0 && month > 0) {
+                        date = year + "-" + (month<10 ? "0"+Integer.toString(month) : Integer.toString(month)) + "-" + (day<10 ? "0"+Integer.toString(day) : Integer.toString(day));
+                        if (dateIsValid(date, month, day)) {
+                            System.out.println(date);
                         }
                     }
                 }
             }
+        }
     }
     
     public static int reverse(int n) {
